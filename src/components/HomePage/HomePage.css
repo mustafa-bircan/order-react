@@ -1,4 +1,4 @@
-.hero-section {
+.home-section {
     height: 100vh;
     background-image: url('/images/iteration-1-images/home-banner.png');
     background-size: cover;
@@ -7,19 +7,14 @@
     justify-content: center;
   }
   
-  .content {
+  .home-content {
     text-align: center;
     padding: 20px;
     color: white;
   }
   
-  .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
   
-  .subtitle {
+  .home-subtitle {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
