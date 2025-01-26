@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Col, Form, FormGroup, FormFeedback, Input, Label } from 'reactstrap';
 import './OrderPage.css';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import CheckBox from './CheckBox';
+import axios from 'axios';
 
 function OrderPage() {
     const [formData, setFormData] = useState({
@@ -91,6 +92,45 @@ function OrderPage() {
     const totalIngredientsPrice = formData.ingredients.length * ingredientPrice;
     const totalPrice = (pizzaPrice + totalIngredientsPrice) * pizzaCount;
 
+    const history = useHistory();
+
+    const handleSubmit = (e) => {
+        e.preventDefault(); 
+    
+        if (isValid) {
+            const payload = {
+                name: formData.name,
+                size: formData.size,
+                dough: formData.dough,
+                ingredients: formData.ingredients,
+                pizzaCount: pizzaCount,
+                totalPrice: totalPrice.toFixed(2),
+            };
+    
+            axios.post('https://reqres.in/api/pizza', payload)
+                .then((response) => {
+                    console.log('Sipariş başarıyla alındı: ', response.data);
+                    history.push('/Success');
+    
+                    
+                    console.log('Sipariş Özeti:', {
+                        id: response.data.id,
+                        name: response.data.name,
+                        size: response.data.size,
+                        dough: response.data.dough,
+                        ingredients: response.data.ingredients.join(', '),
+                        pizzaCount: response.data.pizzaCount,
+                        totalPrice: response.data.totalPrice,
+                    });
+    
+                   
+                })
+                .catch((error) => {
+                    console.error('Sipariş gönderilirken bir hata oluştu:', error);
+                });
+        }
+    };
+
     return (
         <>
             <div className='order-general'>
@@ -119,7 +159,7 @@ function OrderPage() {
                         </p>
                     </div>
 
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <div className='form-row'>
                             <FormGroup className='col'>
                                 <Label for="chooseSize">
@@ -203,11 +243,11 @@ function OrderPage() {
                             </div>
 
                             <div className='selected-list'>
-                            <Input
-                                type="hidden"
-                                invalid={errors.ingredients !== ''}
-                            />
-                            <FormFeedback>{errors.ingredients}</FormFeedback>
+                                <Input
+                                    type="hidden"
+                                    invalid={errors.ingredients !== ''}
+                                />
+                                <FormFeedback>{errors.ingredients}</FormFeedback>
                                 <strong>Seçilen Malzemeler: </strong>
                                 {formData.ingredients.length > 0
                                     ? formData.ingredients.join(", ")
@@ -248,9 +288,11 @@ function OrderPage() {
                                 <strong>Sipariş Toplamı</strong>
                                 <div className='choices'>Seçimler: {totalIngredientsPrice.toFixed(2)}₺</div>
                                 <div className='total-price'>Toplam: {totalPrice.toFixed(2)}₺</div>
-                                <Button color="warning" disabled={!isValid}>
+                            
+                                <Button color="warning" type="submit" disabled={!isValid}>
                                     Sipariş Ver
                                 </Button>
+                                
                             </div>
                         </div>
 
