@@ -2,18 +2,29 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Col, Form, FormGroup, FormFeedback, Input, Label } from 'reactstrap';
 import './OrderPage.css';
-import { Link, useHistory, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import CheckBox from './CheckBox';
+import Footer from '../FooterPage/Footer';
 import axios from 'axios';
 
 
 function OrderPage() {
+
+    const pizzaTypes = [
+        { name: 'Acı Pizza', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 85.5, rating: 4.7, reviews: 200 },
+        { name: 'Margarita', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 75.5, rating: 4.7, reviews: 200 },
+        { name: 'Peperoni', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 90.0, rating: 4.7, reviews: 200 },
+        { name: 'Veggie', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 80.0, rating: 4.7, reviews: 200 },
+        { name: 'BBQ', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 95.0, rating: 4.7, reviews: 200 }
+    ];
+
     const [formData, setFormData] = useState({
         name: '',
         size: '',
         dough: '',
         ingredients: [],
         note: '',
+        pizzaType: null
     });
     const [errors, setErrors] = useState({
         name: '',
@@ -21,11 +32,11 @@ function OrderPage() {
         size: '',
         dough: '',
         note: '',
+        pizzaType:'',
     });
     const [isValid, setIsValid] = useState(false);
     const [pizzaCount, setPizzaCount] = useState(1);
 
-    const pizzaPrice = 85.5;
     const ingredientPrice = 5;
 
     const ingredients = [
@@ -47,11 +58,13 @@ function OrderPage() {
     ];
 
     useEffect(() => {
+        const shuffledIngredients = [...ingredients].sort(() => Math.random() - 0.5,);
         setFormData((prevFormData) => ({
             ...prevFormData,
-            ingredients: ingredients.slice(0, 4).map((ingredient) => ingredient.value),
+            ingredients: shuffledIngredients.slice(0, 4).map((ingredient) => ingredient.value),
         }));
     }, []);
+
 
     useEffect(() => {
         const ingredientError = formData.ingredients.length < 4
@@ -62,15 +75,17 @@ function OrderPage() {
         const nameError = formData.name.length < 3 ? 'İsim en az 3 karakter olmalı.' : '';
         const sizeError = !formData.size ? 'Pizza boyutu seçilmelidir.' : '';
         const doughError = !formData.dough ? 'Hamur kalınlığı seçilmelidir.' : '';
+        const pizzaTypeError = !formData.pizzaType ? 'Pizza türü seçilmelidr.' : '';
 
         setErrors({
             name: nameError,
             ingredients: ingredientError,
             size: sizeError,
             dough: doughError,
+            pizzaType: pizzaTypeError
         });
 
-        setIsValid(!nameError && !ingredientError && !sizeError && !doughError);
+        setIsValid(!nameError && !ingredientError && !sizeError && !doughError && !pizzaTypeError);
     }, [formData]);
 
     const handleCheckChange = (event) => {
@@ -93,8 +108,7 @@ function OrderPage() {
     };
 
     const totalIngredientsPrice = formData.ingredients.length * ingredientPrice;
-    const totalPrice = (pizzaPrice + totalIngredientsPrice) * pizzaCount;
-
+    const totalPrice = ((formData.pizzaType?.price || 0) + totalIngredientsPrice) * pizzaCount;
     const history = useHistory();
 
     const handleSubmit = (event) => {
@@ -107,6 +121,7 @@ function OrderPage() {
                 dough: formData.dough,
                 ingredients: formData.ingredients,
                 pizzaCount: pizzaCount,
+                totalIngredientsPrice: totalIngredientsPrice.toFixed(2),
                 totalPrice: totalPrice.toFixed(2),
                 note: formData.note,
             };
@@ -114,18 +129,18 @@ function OrderPage() {
             axios.post('https://reqres.in/api/pizza', payload)
                 .then((response) => {
                     console.log('Sipariş başarıyla alındı: ', response.data);
-                    history.push('/Success');
+                    history.push(`/success/${encodeURIComponent(formData.name)}/${formData.size}/${formData.dough}/${encodeURIComponent(formData.ingredients.join(','))}/${encodeURIComponent(formData.note)}/${formData.pizzaType.name}/${totalIngredientsPrice.toFixed(2)}/${totalPrice.toFixed(2)}`);
 
 
                     console.log('Sipariş Özeti:', {
                         id: response.data.id,
-                        name: response.data.name,
-                        size: response.data.size,
-                        dough: response.data.dough,
-                        ingredients: response.data.ingredients.join(', '),
-                        pizzaCount: response.data.pizzaCount,
-                        totalPrice: response.data.totalPrice,
-                        note: formData.note,
+                        Name: response.data.name,
+                        Size: response.data.size,
+                        Dough: response.data.dough,
+                        Ingredients: response.data.ingredients.join(', '),
+                        PizzaCount: response.data.pizzaCount,
+                        TotalPrice: response.data.totalPrice,
+                        Note: formData.note,
                     });
 
 
@@ -143,11 +158,16 @@ function OrderPage() {
                     <div className="order-content">
                         <img src='../images/iteration-1-images/logo.svg' />
                     </div>
+                </div>
+                <div className='main-content'>
+                    <img src='/images/iteration-2-images/pictures/form-banner.png' />
+
                     <div className="navigation-links">
                         <NavLink
                             to='/'
                             className="navigation-link"
                             activeClassName="active-link"
+                            data-cy="homepage-link"
                         >
                             Anasayfa
                         </NavLink>
@@ -155,28 +175,47 @@ function OrderPage() {
                             to='/OrderPage'
                             className="navigation-link"
                             activeClassName="active-link"
+                            data-cy="orderpage-link"
                         >
                             Sipariş Oluştur
                         </NavLink>
+                    </div>
+                    <div className='pizza-description'>
+                        <FormGroup>
+                            <Label for="pizzaType">
+                                <strong>Pizza Türü Seç</strong> <span className='required'>*</span>
+                            </Label>
+                            <Input
+                                id="pizzaType"
+                                name="pizzaType"
+                                type="select"
+                                invalid={errors.pizzaType !== ''}
+                                onChange={(event) => setFormData({ ...formData, pizzaType: pizzaTypes.find(pizza => pizza.name === event.target.value) })}
+                                data-cy="pizza-type-error"
+                            >
+                                <option value="">Pizza Türü Seçiniz</option>
+                                {pizzaTypes.map((pizza) => (
+                                    <option key={pizza.name} value={pizza.name}>{pizza.name}</option>
+                                ))}
+                            </Input>
+                            {errors.pizzaType && <FormFeedback data-cy="pizza-type-error">{errors.pizzaType}</FormFeedback>}
+                        </FormGroup>
+                        <div className='product-information'>
+                            {formData.pizzaType && (
+                                <>
+                                    <h5>{formData.pizzaType.name}</h5>
+                                    <div className='price-and-rating'>
+                                        <div className='price'>{formData.pizzaType.price}₺</div>
+                                    </div>
+                                    <p>{formData.pizzaType.description}</p>
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div className='main-order'>
-                <div className='product-information'>
-                    <h5>Position Absolute Acı Pizza</h5>
-                    <div className='price-and-rating'>
-                        <div className='price'>{pizzaPrice}₺</div>
-                        <div className='product-point'>
-                            <div>4.9</div>
-                            <div>(200)</div>
-                        </div>
-                    </div>
-                    <p>
-                        Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.
-                    </p>
-                </div>
-
                 <Form onSubmit={handleSubmit}>
                     <div className='form-row'>
                         <FormGroup className='col'>
@@ -191,6 +230,7 @@ function OrderPage() {
                                     id="small"
                                     invalid={errors.size !== ''}
                                     onChange={(event) => setFormData({ ...formData, size: event.target.value })}
+                                    data-cy="size-small"
                                 />
                                 <Label htmlFor='small'>Küçük</Label>
                             </FormGroup>
@@ -202,6 +242,7 @@ function OrderPage() {
                                     id="medium"
                                     invalid={errors.size !== ''}
                                     onChange={(event) => setFormData({ ...formData, size: event.target.value })}
+                                    data-cy="size-medium"
                                 />
                                 <Label htmlFor='medium'>Orta</Label>
                             </FormGroup>
@@ -213,10 +254,11 @@ function OrderPage() {
                                     id="large"
                                     invalid={errors.size !== ''}
                                     onChange={(event) => setFormData({ ...formData, size: event.target.value })}
+                                    data-cy="size-large"
                                 />
                                 <Label htmlFor='large'>Büyük</Label>
                             </FormGroup>
-                            {errors.size && <FormFeedback>{errors.size}</FormFeedback>}
+                            {errors.size && <FormFeedback data-cy="size-error">{errors.size}</FormFeedback>}
                         </FormGroup>
 
                         <FormGroup className='col'>
@@ -229,6 +271,7 @@ function OrderPage() {
                                 type="select"
                                 invalid={errors.dough !== ''}
                                 onChange={(event) => setFormData({ ...formData, dough: event.target.value })}
+                                data-cy="dough-selection"
                             >
                                 <option value=''>Hamur Kalınlığı</option>
                                 <option value='İnce Hamur'>İnce Hamur</option>
@@ -238,13 +281,12 @@ function OrderPage() {
                                 <option value='Ekşi Mayalı Hamur'>Ekşi Mayalı Hamur</option>
                                 <option value='Glutenli Hamur'>Glutenli Hamur</option>
                             </Input>
-                            {errors.dough && <FormFeedback>{errors.dough}</FormFeedback>}
+                            {errors.dough && <FormFeedback data-cy="dough-error">{errors.dough}</FormFeedback>}
                         </FormGroup>
                     </div>
 
                     <div className='additional-ingredients'>
                         <h6><strong>Ek Malzemeler</strong></h6>
-                        <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
 
                         <div className='ingredients-list'>
                             {ingredients.map((ingredient) => (
@@ -255,6 +297,7 @@ function OrderPage() {
                                         value={ingredient.value}
                                         onChange={handleCheckChange}
                                         isChecked={formData.ingredients.includes(ingredient.value)}
+                                        data-cy="ingredients-checkbox"
                                     />
                                 </div>
                             ))}
@@ -264,8 +307,9 @@ function OrderPage() {
                             <Input
                                 type="hidden"
                                 invalid={errors.ingredients !== ''}
+                                data-cy="ingredients-input"
                             />
-                            <FormFeedback>{errors.ingredients}</FormFeedback>
+                            <FormFeedback data-cy="ingredients-error">{errors.ingredients}</FormFeedback>
                             <strong>Seçilen Malzemeler: </strong>
                             {formData.ingredients.length > 0
                                 ? formData.ingredients.join(", ")
@@ -287,8 +331,9 @@ function OrderPage() {
                                 onChange={(event) => setFormData({ ...formData, name: event.target.value })}
                                 type="text"
                                 invalid={errors.name !== ''}
+                                data-cy="name-input"
                             />
-                            <FormFeedback>{errors.name}</FormFeedback>
+                            <FormFeedback data-cy="name-error">{errors.name}</FormFeedback>
                         </FormGroup>
                     </div>
 
@@ -304,6 +349,7 @@ function OrderPage() {
                                 placeholder="Siparişe eklemek istediğin bir not var mı?)"
                                 onChange={(event) => setFormData({ ...formData, note: event.target.value })}
                                 type="textarea"
+                                data-cy="note-input"
                             />
                         </FormGroup>
                     </div>
@@ -311,11 +357,11 @@ function OrderPage() {
 
                     <div className='order-summary'>
                         <div className='orderAdd-button'>
-                            <Button color="warning" onClick={() => handlePizzaCountChange("decrement")}>
+                            <Button color="warning" onClick={() => handlePizzaCountChange("decrement")} data-cy="decrement-button">
                                 -
                             </Button>
                             <div className='pizza-count'>{pizzaCount}</div>
-                            <Button color="warning" onClick={() => handlePizzaCountChange("increment")}>
+                            <Button color="warning" onClick={() => handlePizzaCountChange("increment")} data-cy="increment-button">
                                 +
                             </Button>
                         </div>
@@ -332,7 +378,7 @@ function OrderPage() {
                                 <span>{totalPrice.toFixed(2)}₺</span>
                             </div>
 
-                            <Button color="warning" type="submit" disabled={!isValid}>
+                            <Button color="warning" type="submit" disabled={!isValid} data-cy="submit-button">
                                 SİPARİŞ VER
                             </Button>
                         </div>
@@ -341,6 +387,7 @@ function OrderPage() {
 
                 </Form>
             </div>
+            <Footer />
         </>
     );
 }
