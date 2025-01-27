@@ -1,6 +1,7 @@
 import React from 'react';
 import './Success.css';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import Footer from '../FooterPage/Footer';
 
 function Success() {
   const { name, size, dough, ingredients, note, pizzaType, totalIngredientsPrice, totalPrice } = useParams();
@@ -22,7 +23,7 @@ function Success() {
     <>
       <div className="succes-section">
         <div className="succes-content">
-          <img src="../images/iteration-1-images/logo.svg" alt="Logo" />
+          <img src="/images/iteration-1-images/logo.svg" alt="Logo" />
           <h4>Lezzetin Yolda</h4>
           <h1>SİPARİŞ ALINDI</h1>
           <hr />
@@ -41,6 +42,7 @@ function Success() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
