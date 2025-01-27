@@ -1,5 +1,7 @@
 import React from 'react'
 import './Footer.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function Footer() {
   const instaImages = [
@@ -15,18 +17,19 @@ function Footer() {
     <div className='footer-overall'>
       <div className="footer-logo-info">
         <img src="/images/iteration-2-images/footer/logo-footer.svg" alt="Logo" />
-        <div>
+        <div className='footer-icons'>
           <div className="icon-info">
             <img src="/images/iteration-2-images/footer/icons/icon-1.png" alt="Logo" />
-            <p>Address info here</p>
+            <p>341 Londonderry Road,
+              Istanbul Türkiye</p>
           </div>
           <div className="icon-info">
             <img src="/images/iteration-2-images/footer/icons/icon-2.png" alt="Logo" />
-            <p>Email info here</p>
+            <p>aciktim@teknolojikyemekler.com</p>
           </div>
           <div className="icon-info">
             <img src="/images/iteration-2-images/footer/icons/icon-3.png" alt="Logo" />
-            <p>Phone info here</p>
+            <p>+90 216 123 45 67</p>
           </div>
         </div>
       </div>
@@ -43,11 +46,18 @@ function Footer() {
       </div>
       <div className="footer-instagram">
         <h3>INSTAGRAM</h3>
-          <div className='insta-group'>
-            {instaImages.map((image,index) =>(
-              <img key={index} src={image} alt={`Instagram ${index}`} />
-            ))}
-          </div>
+        <div className='insta-group'>
+          {instaImages.map((image, index) => (
+            <img key={index} src={image} alt={`Instagram ${index}`} />
+          ))}
+        </div>
+      </div>
+      <hr className='hr' />
+      <div className='footer-bottom'>
+        <div className="bottom-content">
+        <p>© 2023 Teknolojik Yemekler. </p>
+          <FontAwesomeIcon icon={faTwitter} size="2x" color="white" />
+        </div>
       </div>
     </div>
   )
