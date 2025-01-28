@@ -11,6 +11,7 @@ function CheckBox({name, label, value, onChange, isChecked}) {
             onChange={onChange}
             checked={isChecked}
             id={value}
+            data-cy={`ingredient-checkbox-${value}`}
         />
         <Label htmlFor={value} style={{ marginLeft: '10px' }}>{label}</Label>
     </FormGroup>
