@@ -10,6 +10,8 @@
 .succes-content h4 {
   margin-top: 3rem;
   font-family: 'Satisfy', cursive;
+  font-weight: 400;
+  font-size: 32px;
   color: #FDC913;
 }
 
@@ -18,10 +20,10 @@
 }
 
 .succes-content h1 {
-  font-family: 'Roboto Condensed';
-  font-weight: 300;
-  font-size: 5rem;
-  color: #FAF7F2;
+  font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 300; 
+    font-size: 86px;
+  color: #FFFFFF;
 }
 
 .succes-content hr {
@@ -31,6 +33,7 @@
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
+
 .general-summary {
   background-color: #292929;
   border: 1px solid #444;
@@ -42,62 +45,78 @@
   margin: 2rem auto;
 }
 
-.general-summary h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #FDC913;
-  text-align: center;
+.general-summary > div:first-child {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600; 
+  font-size: 22px;
 }
+
 
 .order-brief {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: center;
   gap: 1rem;
   margin-top: 1rem;
 }
 
 .order-brief div {
-  color: #EAEAEA;
-  font-size: 1.2rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400; 
+  font-size: 1.2rem; 
   line-height: 1.6;
+  color: #FFFFFF; 
 }
 
+
+
 .order-brief strong {
-  font-weight: bold;
-  color: #FDC913; 
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700; 
+  font-size: 1rem; 
+  color: #FFFFFF;
 }
+
+
+
 
 .total-brief {
   display: flex;
   flex-direction: column;
   border: 1px solid #555;
   border-radius: 0.5rem;
-  padding: 1.5rem;
-  gap: 1rem;
   background-color: #5F5F5F;
-  margin-top: 2rem;
-  margin-left: 8rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .total-brief h6 {
-  font-size: 1.5rem;
-  color: #FDC913;
-  margin-bottom: 1rem;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600; 
+  font-size: 1.25rem;
+  color: #FFFFFF; 
+  margin-top: 2rem;
 }
 
-.total-brief>div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.total-brief span {
-  color: #FAF7F2;
+.choices-total-price span {
+  color: #FFFFFF;
   font-size: 1.2rem;
   font-weight: 500;
+  margin-right: 4rem;
+  margin-left: 4rem;
 }
+
+.summary-total-price span {
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  font-weight: 500; 
+  margin-right: 4rem;
+  margin-left: 4rem;
+}
+
+.summary-total-price  {
+margin-bottom: 2rem;
+}
+
 
 button {
   background: #FDC913;
