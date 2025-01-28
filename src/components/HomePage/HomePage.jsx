@@ -75,13 +75,35 @@ function HomePage() {
 
 
             <div className='main-home'>
+                <div className='cta-cards'>
+                    <div className='card1'>
+                        <img src='images/iteration-2-images/cta/kart-1.png' alt="Kart 1" />
+                        <h1>Özel <br />Lezzetus</h1>
+                        <p>Position:Absolute Acı Burger</p>
+                        <button>SİPARİŞ VER</button>
+                    </div>
+                    <div className='cards'>
+                        <div className='card2'>
+                            <img src='images/iteration-2-images/cta/kart-2.png' alt="Kart 2" />
+                            <h1>Hackathlon <br />Burger Menü</h1>
+                            <button>SİPARİŞ VER</button>
+                        </div>
+                        <div className='card3'>
+                            <img src='images/iteration-2-images/cta/kart-3.png' alt="Kart 3" />
+                            <h1>Çoooook hızlı <br />npm gibi kurye </h1>
+                            <button>SİPARİŞ VER</button>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div className='packet-info'>
                     <h4>en çok paketlenen menüler</h4>
                     <h1>Acıktıran Kodlara Doyuran Lezzetler</h1>
                 </div>
                 <div className="button-container">
                     {homeImages.map((item, index) => (
-                        <button key={index} className={`image-button ${item.text === "Pizza" ? "other" : ""}`} onClick={() => console.log(`${item.text} button clicked`)}>
+                        <button key={index} className={`image-button ${item.text === "Pizza" ? "other" : ""}`}>
                             <img src={item.src} alt={item.text} />
                             <span>{item.text}</span>
                         </button>

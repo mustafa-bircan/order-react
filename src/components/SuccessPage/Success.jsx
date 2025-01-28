@@ -12,7 +12,7 @@ function Success() {
     name,
     size,
     dough,
-    decodedIngredients, 
+    decodedIngredients,
     note,
     pizzaType,
     totalIngredientsPrice,
@@ -27,19 +27,28 @@ function Success() {
           <h4>Lezzetin Yolda</h4>
           <h1>SİPARİŞ ALINDI</h1>
           <hr />
-          <div className="order-brief">
-            <h2>Sipariş Özeti</h2>
-            <div><strong>Pizza Türü: </strong>{pizzaType}</div>
-            <div><strong>Ad-Soyad: </strong>{name}</div>
-            <div><strong>Boyut: </strong>{size}</div>
-            <div><strong>Hamur: </strong>{dough}</div>
-            <div><strong>Ek Malzemeler: </strong>{decodedIngredients.join(", ")}</div>
-            <div><strong>Sipariş Notu: </strong>{note}</div>
-            <div className="total-brief">
-              <div><strong>Malzeme Fiyatı: </strong>{totalIngredientsPrice}₺</div>
-              <div><strong>Toplam Fiyat: </strong>{totalPrice}₺</div>
+          <div className='general-summary'>
+            <div style={{ fontSize: '2rem', fontWeight: 'bolder', color: '#FAF7F2' }}>{pizzaType}</div>
+            <div className="order-brief">
+              <div>Ad-Soyad: <strong>{name} </strong></div>
+              <div>Boyut: <strong>{size} </strong></div>
+              <div>Hamur: <strong> {dough}</strong></div>
+              <div>Ek Malzemeler: <strong>{decodedIngredients.join(", ")} </strong></div>
+              <div>Sipariş Notu: <strong>{note} </strong></div>
+              <div className="total-brief">
+                <h6>Sipariş Toplamı</h6>
+                <div className='choices-total-price'>
+                  <span>Seçimler</span>
+                  <span>{totalIngredientsPrice}₺</span>
+                </div>
+                <div className='summary-total-price'>
+                  <span>Toplam</span>
+                  <span>{totalPrice}₺</span>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
       <Footer />

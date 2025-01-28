@@ -1,28 +1,28 @@
 .home-section {
-    height: 100vh;
-    background-image: url('/images/iteration-1-images/home-banner.png');
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .home-content {
-    text-align: center;
-    padding: 20px;
-    color: #FAF7F2;
-  }
-  
-  
-  .home-subtitle {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-  }
-  
+  height: 100vh;
+  background-image: url('/images/iteration-1-images/home-banner.png');
+  background-size: cover;
+  background-position: center;
+}
 
-  .home-content h4 {
-    margin-top: 3rem;
-    font-family: 'Satisfy', cursive;
-    color:#FDC913;
-  }
+.home-content {
+  text-align: center;
+  padding: 20px;
+  color: #FAF7F2;
+}
+
+
+.home-subtitle {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+
+.home-content h4 {
+  margin-top: 3rem;
+  font-family: 'Satisfy', cursive;
+  color: #FDC913;
+}
 
 
 .header-bottom {
@@ -31,19 +31,24 @@
   margin-top: 1rem;
 }
 
+.header-bottom img:hover {
+  transform: scale(1.5);
+  cursor: pointer;
+}
+
 .image-item-text {
   display: flex;
   flex-direction: row;
 }
 
-.image-item-text img{
+.image-item-text img {
   margin-right: 1rem;
 }
 
-.image-item-text p{
+.image-item-text p {
   margin: 1.5rem 0;
 }
-  
+
 .main-home {
   display: flex;
   flex-direction: column;
@@ -52,11 +57,11 @@
 }
 
 .packet-info {
-  margin-top: 20rem;
+  margin-top: 4rem;
   text-align: center;
 }
 
-.packet-info h4{
+.packet-info h4 {
   font-family: 'Satisfy', cursive;
   color: #CE2829;
 }
@@ -69,10 +74,10 @@
   padding: 1rem;
 }
 
-.button-container button{
+.button-container button {
   background-color: white;
   border-radius: 2rem;
-  border:none;
+  border: none;
   padding: 0.5rem 1rem;
 }
 
@@ -134,3 +139,138 @@
   margin-left: 2rem;
   margin-right: 2rem;
 }
+
+.cta-cards {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 4rem;
+}
+
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cta-cards img {
+  border-radius: 1rem;
+}
+
+.card1 {
+  position: relative;
+}
+
+.card1 h1 {
+  position: absolute;
+  color: white;
+  top: 10%;
+  left: 10%;
+  font-family: 'Quattrocento';
+  font-weight: bold;
+}
+
+.card1 p {
+  position: absolute;
+  color: white;
+  top: 40%;
+  left: 10%;
+  font-size: 1.5rem;
+}
+
+.card1 button {
+  position: absolute;
+  color: #CE2829;
+  top: 50%;
+  left: 10%;
+  border: none;
+  border-radius: 2rem;
+  padding: 1rem 2.5rem;
+  background-color: white;
+}
+
+.card1 h1 {
+  font-size: 4rem;
+}
+
+.card1 button:hover {
+  animation: shake-rotation 0.7s ease-in-out;
+}
+
+
+.card2 {
+  position: relative;
+}
+
+.card2 h1 {
+  position: absolute;
+  color: white;
+  top: 20%;
+  left: 5%;
+  font-family: 'Quattrocento';
+  font-weight: bold;
+}
+
+.card2 button {
+  position: absolute;
+  color: #CE2829;
+  top: 65%;
+  left: 5%;
+  border: none;
+  border-radius: 2rem;
+  padding: 1rem 2.5rem;
+  background-color: white;
+}
+
+.card2 h1 {
+  font-size: 2rem;
+}
+
+.card2 button:hover {
+  animation: shake-rotation 0.7s ease-in-out;
+}
+
+
+
+.card3 {
+  position: relative;
+}
+
+.card3 h1 {
+  position: absolute;
+  color: white;
+  top: 15%;
+  left: 5%;
+}
+
+
+.card3 button {
+  position: absolute;
+  color: #CE2829;
+  top: 60%;
+  left: 5%;
+  border: none;
+  border-radius: 2rem;
+  padding: 1rem 2.5rem;
+  background-color: white;
+}
+
+.card3 h1 {
+  font-size: 2.5rem;
+}
+
+.card3 button:hover {
+  animation: shake-rotation 0.7s ease-in-out;
+}
+
+@keyframes shake-rotation {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+
+
