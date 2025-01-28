@@ -90,7 +90,7 @@ function HomePage() {
                         </div>
                         <div className='card3'>
                             <img src='images/iteration-2-images/cta/kart-3.png' alt="Kart 3" />
-                            <h1>Çoooook hızlı <br />npm gibi kurye </h1>
+                            <h1><span className='card3-title'>Çoooook</span> hızlı <br />npm gibi kurye </h1>
                             <button>SİPARİŞ VER</button>
                         </div>
                     </div>
