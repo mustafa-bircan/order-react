@@ -57,13 +57,6 @@ function OrderPage() {
         { label: "Salam", value: "Salam" }
     ];
 
-    useEffect(() => {
-        const shuffledIngredients = [...ingredients].sort(() => Math.random() - 0.5,);
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            ingredients: shuffledIngredients.slice(0, 4).map((ingredient) => ingredient.value),
-        }));
-    }, []);
 
 
     useEffect(() => {
@@ -191,7 +184,7 @@ function OrderPage() {
                                 type="select"
                                 invalid={errors.pizzaType !== ''}
                                 onChange={(event) => setFormData({ ...formData, pizzaType: pizzaTypes.find(pizza => pizza.name === event.target.value) })}
-                                data-cy="pizza-type-error"
+                                data-cy="pizza-type"
                             >
                                 <option value="">Pizza Türü Seçiniz</option>
                                 {pizzaTypes.map((pizza) => (
@@ -226,37 +219,37 @@ function OrderPage() {
                                 <Input
                                     type="radio"
                                     name="size"
-                                    value="small"
+                                    value="Small"
                                     id="small"
                                     invalid={errors.size !== ''}
                                     onChange={(event) => setFormData({ ...formData, size: event.target.value })}
                                     data-cy="size-small"
                                 />
-                                <Label htmlFor='small'>Küçük</Label>
+                                <Label htmlFor='small'>Small</Label>
                             </FormGroup>
                             <FormGroup>
                                 <Input
                                     type="radio"
                                     name="size"
-                                    value="medium"
+                                    value="Medium"
                                     id="medium"
                                     invalid={errors.size !== ''}
                                     onChange={(event) => setFormData({ ...formData, size: event.target.value })}
                                     data-cy="size-medium"
                                 />
-                                <Label htmlFor='medium'>Orta</Label>
+                                <Label htmlFor='medium'>Medium</Label>
                             </FormGroup>
                             <FormGroup>
                                 <Input
                                     type="radio"
                                     name="size"
-                                    value="large"
+                                    value="Large"
                                     id="large"
                                     invalid={errors.size !== ''}
                                     onChange={(event) => setFormData({ ...formData, size: event.target.value })}
                                     data-cy="size-large"
                                 />
-                                <Label htmlFor='large'>Büyük</Label>
+                                <Label htmlFor='large'>Large</Label>
                             </FormGroup>
                             {errors.size && <FormFeedback data-cy="size-error">{errors.size}</FormFeedback>}
                         </FormGroup>
@@ -286,7 +279,8 @@ function OrderPage() {
                     </div>
 
                     <div className='additional-ingredients'>
-                        <h6><strong>Ek Malzemeler</strong></h6>
+                        <strong>Ek Malzemeler</strong>
+                        <p>En Fazla 10 malzeme seçebilirsiniz. 5₺</p>
 
                         <div className='ingredients-list'>
                             {ingredients.map((ingredient) => (
@@ -297,7 +291,7 @@ function OrderPage() {
                                         value={ingredient.value}
                                         onChange={handleCheckChange}
                                         isChecked={formData.ingredients.includes(ingredient.value)}
-                                        data-cy="ingredients-checkbox"
+                                        data-cy={`ingredient-checkbox-${ingredient}`}
                                     />
                                 </div>
                             ))}
@@ -312,7 +306,7 @@ function OrderPage() {
                             <FormFeedback data-cy="ingredients-error">{errors.ingredients}</FormFeedback>
                             <strong>Seçilen Malzemeler: </strong>
                             {formData.ingredients.length > 0
-                                ? formData.ingredients.join(", ")
+                                ? formData.ingredients.join("- ")
                                 : "Hiçbir malzeme seçilmedi!"
                             }
                         </div>
@@ -346,7 +340,7 @@ function OrderPage() {
                                 id="note"
                                 name="note"
                                 value={formData.note}
-                                placeholder="Siparişe eklemek istediğin bir not var mı?)"
+                                placeholder="Siparişe eklemek istediğin bir not var mı?"
                                 onChange={(event) => setFormData({ ...formData, note: event.target.value })}
                                 type="textarea"
                                 data-cy="note-input"

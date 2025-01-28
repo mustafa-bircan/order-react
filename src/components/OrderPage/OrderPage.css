@@ -1,0 +1,302 @@
+.order-section {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #CE2829;
+}
+
+.order-content {
+    text-align: center;
+    padding: 2rem;
+    color: white;
+}
+
+.main-content {
+    position: relative;
+    background-color: #FAF7F2;
+}
+
+.main-content img {
+    position:absolute;
+    left:30%;
+}
+
+
+.navigation-links {
+    display: flex;
+    align-items: center;
+    margin-left: 376px;
+}
+
+.navigation-link {
+    text-decoration: none;
+    color: black;
+    padding: 0 0.5rem;
+    margin-top: 20rem;
+    margin-bottom: 2rem;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;  
+    font-size: 16px;
+}
+
+.navigation-links .navigation-link:nth-child(2) {
+    color: #CE2829;
+}
+
+.navigation-links .navigation-link:nth-child(2).active-link {
+    color: #CE2829;
+}
+
+.navigation-link:hover {
+    cursor: pointer;
+}
+
+.pizza-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 750px;
+    margin: 0 auto;
+    gap: 1rem;
+    padding-bottom: 2rem;
+}
+.pizza-description .product-information p {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;  
+    font-size: 16px;
+}
+
+
+.main-order {
+    width: 750px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    margin-top: 1rem;
+}
+
+.main-order p {
+    color: #5F5F5F;
+}
+
+.product-information {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-information h5 {
+    margin-bottom: 1rem;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; 
+    font-size: 22px;
+}
+
+.product-information .price-and-rating {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+.product-information .price-and-rating .price {
+    margin-right: 50px;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.price-and-rating {
+    margin-bottom: 1rem;
+}
+
+.product-point {
+    display: flex;
+    align-items: center;
+    gap:60px;
+}
+
+.form-general {
+    width: 100%;
+}
+
+.required {
+    color:red;
+}
+
+.form-row {
+    display: flex;
+    gap: 2rem;
+}
+
+label[for="chooseSize"] strong {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; 
+    font-size: 20px;
+}
+
+label[for="chooseDough"] strong {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; 
+    font-size: 20px;
+}
+
+
+.additional-ingredients  {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+.additional-ingredients p  {
+    color: #5F5F5F;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500;  
+    font-size: 16px;
+}
+
+.additional-ingredients strong {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;  
+    font-size: 20px;
+}
+
+
+.col select {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 500; 
+    font-size: 14px;
+}
+
+
+.user-name strong,
+.order-note strong {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+.ingredients-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.checkbox-item {
+    width: 30%;
+}
+
+.checkbox-item label {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700;   
+    font-size: 16px;
+}
+
+
+.selected-list {
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+}
+
+.selected-list strong {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; 
+    font-size: 14px;
+}
+
+
+.order-note textarea::placeholder {
+    font-family: 'Barlow';
+    font-weight: 500; 
+    font-size: 14px;
+}
+
+
+.order-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;  
+    gap: 2rem;  
+}
+
+.orderAdd-button Button, .orderAdd-button .pizza-count {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 700; 
+    font-size: 16px;
+}
+
+
+.orderAdd-button {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    background-color: #FDC913;
+    border-radius: 1rem;
+}
+
+.pizza-count {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+}
+
+.orderAdd-button Button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-total {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    flex-grow: 1;
+    gap: 1rem;
+}
+
+.order-total h6 {
+    margin-top: 1rem;
+    padding-left: 2rem;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; 
+    font-size: 20px;
+}
+
+.order-total .choices span {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; 
+    font-size: 18px;
+}
+
+.order-total > div {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;  
+}
+
+.order-total button {
+    padding: 1.5rem;
+}
+
+.total-price span {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; 
+    font-size: 18px;
+    color:#CE2829;
+    padding-left: 2rem;
+    margin-right: 1rem;
+}
+
+.choices span {
+    color:#5F5F5F;
+    padding-left: 2rem;
+    margin-right: 1rem;
+}
