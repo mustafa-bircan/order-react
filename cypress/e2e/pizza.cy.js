@@ -67,7 +67,7 @@ describe('Pizza Sipariş Formu Testleri', () => {
     cy.get('[data-cy="submit-button"]').should('be.visible');
     cy.get('[data-cy="submit-button"]').click();
 
-    cy.url().should('eq', 'http://localhost:5174/success/Mustafa/Medium/%C4%B0nce%20Hamur/Kanada%20Jambonu%2CTavuk%20Izgara%2CSar%C4%B1msak%2CBiber//Margarita/20.00/95.50');
+    cy.url().should('eq', 'http://localhost:5174/success');
   });
 
 });

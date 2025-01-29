@@ -1,23 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Success.css';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../FooterPage/Footer';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-function Success() {
-  const { name, size, dough, ingredients, note, pizzaType, totalIngredientsPrice, totalPrice } = useParams();
 
-  const decodedIngredients = decodeURIComponent(ingredients).split(',');
+function Success({orderDetails}) {
+  const history = useHistory();
 
-  console.log("Params:", {
-    name,
-    size,
-    dough,
-    decodedIngredients,
-    note,
-    pizzaType,
-    totalIngredientsPrice,
-    totalPrice
-  });
+  useEffect(() => {
+    if (!orderDetails) {
+      history.push("/OrderPage");
+    }
+  }, []);
+
+  if (!orderDetails) {
+    return null; 
+  }
+
+
+console.log(orderDetails);
+const {pizzaType,name,size,dough,ingredients,note,totalPrice,totalIngredientsPrice} = orderDetails;
 
   return (
     <>
@@ -28,12 +30,12 @@ function Success() {
           <h1>SİPARİŞ ALINDI</h1>
           <hr />
           <div className='general-summary'>
-            <div style={{ fontSize: '2rem', fontWeight: 'bolder', color: '#FAF7F2' }}>{pizzaType}</div>
+            <div>{pizzaType.name}</div>
             <div className="order-brief">
               <div>Ad-Soyad: <strong>{name} </strong></div>
               <div>Boyut: <strong>{size} </strong></div>
               <div>Hamur: <strong> {dough}</strong></div>
-              <div>Ek Malzemeler: <strong>{decodedIngredients.join(", ")} </strong></div>
+              <div>Ek Malzemeler: <strong>{ingredients.join(", ")} </strong></div>
               <div>Sipariş Notu: <strong>{note} </strong></div>
               <div className="total-brief">
                 <h6>Sipariş Toplamı</h6>

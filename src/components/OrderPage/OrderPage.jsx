@@ -8,15 +8,46 @@ import Footer from '../FooterPage/Footer';
 import axios from 'axios';
 
 
-function OrderPage() {
+function OrderPage({setOrderDetails}) {
 
     const pizzaTypes = [
-        { name: 'Acı Pizza', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 85.5, rating: 4.7, reviews: 200 },
-        { name: 'Margarita', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 75.5, rating: 4.7, reviews: 200 },
-        { name: 'Peperoni', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 90.0, rating: 4.7, reviews: 200 },
-        { name: 'Veggie', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 80.0, rating: 4.7, reviews: 200 },
-        { name: 'BBQ', description: 'Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.', price: 95.0, rating: 4.7, reviews: 200 }
+        { 
+            name: 'Acı Pizza', 
+            description: 'Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.', 
+            price: 85.5, 
+            rating: 4.7, 
+            reviews: 200 
+        },
+        { 
+            name: 'Margarita', 
+            description: 'React’te hala class component kullanıyorsan, bu pizza tam sana göre! Geleneksel ve zamansız bir seçim olan Margarita pizzası, tıpkı class component gibi köklü ve sağlamdır. Ancak zamanla hooks gibi modern yaklaşımlar geldi ve function component’ler gibi daha hafif ve hızlı çözümler ortaya çıktı. Ama yine de Margarita gibi klasikler her zaman favorilerden biri olarak kalır.', 
+            price: 75.5, 
+            rating: 4.7, 
+            reviews: 200 
+        },
+        { 
+            name: 'Peperoni', 
+            description: 'Hala useEffect’i yanlış dependency array ile kullanıyorsan, Peperoni gibi biraz fazla yoğun bir deneyim yaşayabilirsin! Peperoni pizzası gibi güçlü bir tada sahip olan bu teknik, yanlış kullanıldığında gereksiz render’lara ve ağır performans sorunlarına yol açabilir. O yüzden iyi optimize edilmiş bir React kodu gibi, malzemeleri dengeli kullanmayı unutma!', 
+            price: 90.0, 
+            rating: 4.7, 
+            reviews: 200 
+        },
+        { 
+            name: 'Veggie', 
+            description: 'React’te gereksiz re-render’lar yaparak performansı zorluyorsan, belki biraz hafifletici bir seçenek olan Veggie pizzaya ihtiyacın var! Pure component’ler ve useMemo gibi optimizasyonlarla sayfanı hızlandırabilirsin. Tıpkı sebzelerle hafifletilmiş bu pizza gibi, kodunu da gereksiz yüklerden arındırmalısın.', 
+            price: 80.0, 
+            rating: 4.7, 
+            reviews: 200 
+        },
+        { 
+            name: 'BBQ', 
+            description: 'Eğer tüm state’leri tek bir yerde yönetmeye çalışıyorsan, Redux kullanmaya başlamak gibidir: Başta karmaşık görünebilir ama alışınca vazgeçemezsin! BBQ pizzası da aynı şekilde yoğun ve bol malzemeli olabilir, ama doğru kullanıldığında harika bir deneyim sunar. State yönetimini iyi organize et, aksi takdirde elinde dağılan bir pizza (ve proje) ile karşılaşabilirsin.', 
+            price: 95.0, 
+            rating: 4.7, 
+            reviews: 200 
+        }
     ];
+    
 
     const [formData, setFormData] = useState({
         name: '',
@@ -24,7 +55,7 @@ function OrderPage() {
         dough: '',
         ingredients: [],
         note: '',
-        pizzaType: null
+        pizzaType: null,
     });
     const [errors, setErrors] = useState({
         name: '',
@@ -108,21 +139,12 @@ function OrderPage() {
         event.preventDefault();
 
         if (isValid) {
-            const payload = {
-                name: formData.name,
-                size: formData.size,
-                dough: formData.dough,
-                ingredients: formData.ingredients,
-                pizzaCount: pizzaCount,
-                totalIngredientsPrice: totalIngredientsPrice.toFixed(2),
-                totalPrice: totalPrice.toFixed(2),
-                note: formData.note,
-            };
 
-            axios.post('https://reqres.in/api/pizza', payload)
+            axios.post('https://reqres.in/api/pizza', {...formData, totalPrice, totalIngredientsPrice})
                 .then((response) => {
                     console.log('Sipariş başarıyla alındı: ', response.data);
-                    history.push(`/success/${encodeURIComponent(formData.name)}/${formData.size}/${formData.dough}/${encodeURIComponent(formData.ingredients.join(','))}/${encodeURIComponent(formData.note)}/${formData.pizzaType.name}/${totalIngredientsPrice.toFixed(2)}/${totalPrice.toFixed(2)}`);
+                    setOrderDetails(response.data);
+                    history.push(`/success`);
 
 
                     console.log('Sipariş Özeti:', {
@@ -186,7 +208,7 @@ function OrderPage() {
                                 onChange={(event) => setFormData({ ...formData, pizzaType: pizzaTypes.find(pizza => pizza.name === event.target.value) })}
                                 data-cy="pizza-type"
                             >
-                                <option value="">Pizza Türü Seçiniz</option>
+                                <option value="" hidden>Pizza Türü Seçiniz</option>
                                 {pizzaTypes.map((pizza) => (
                                     <option key={pizza.name} value={pizza.name}>{pizza.name}</option>
                                 ))}
@@ -266,7 +288,7 @@ function OrderPage() {
                                 onChange={(event) => setFormData({ ...formData, dough: event.target.value })}
                                 data-cy="dough-selection"
                             >
-                                <option value=''>Hamur Kalınlığı</option>
+                                <option value='' hidden>Hamur Kalınlığı</option>
                                 <option value='İnce Hamur'>İnce Hamur</option>
                                 <option value='Orta Hamur'>Orta Hamur</option>
                                 <option value='Kalın Hamur'>Kalın Hamur</option>
