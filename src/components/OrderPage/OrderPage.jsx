@@ -6,48 +6,51 @@ import { useHistory, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import CheckBox from './CheckBox';
 import Footer from '../FooterPage/Footer';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
-function OrderPage({setOrderDetails}) {
+
+function OrderPage({ setOrderDetails }) {
 
     const pizzaTypes = [
-        { 
-            name: 'Acı Pizza', 
-            description: 'Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.', 
-            price: 85.5, 
-            rating: 4.7, 
-            reviews: 200 
+        {
+            name: 'Acı Pizza',
+            description: 'Frontend Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. Küçük bir pizzaya bazen pizzetta denir.',
+            price: 85.5,
+            rating: 4.7,
+            reviews: 200
         },
-        { 
-            name: 'Margarita', 
-            description: 'React’te hala class component kullanıyorsan, bu pizza tam sana göre! Geleneksel ve zamansız bir seçim olan Margarita pizzası, tıpkı class component gibi köklü ve sağlamdır. Ancak zamanla hooks gibi modern yaklaşımlar geldi ve function component’ler gibi daha hafif ve hızlı çözümler ortaya çıktı. Ama yine de Margarita gibi klasikler her zaman favorilerden biri olarak kalır.', 
-            price: 75.5, 
-            rating: 4.7, 
-            reviews: 200 
+        {
+            name: 'Margarita',
+            description: 'React’te hala class component kullanıyorsan, bu pizza tam sana göre! Geleneksel ve zamansız bir seçim olan Margarita pizzası, tıpkı class component gibi köklü ve sağlamdır. Ancak zamanla hooks gibi modern yaklaşımlar geldi ve function component’ler gibi daha hafif ve hızlı çözümler ortaya çıktı. Ama yine de Margarita gibi klasikler her zaman favorilerden biri olarak kalır.',
+            price: 75.5,
+            rating: 4.7,
+            reviews: 200
         },
-        { 
-            name: 'Peperoni', 
-            description: 'Hala useEffect’i yanlış dependency array ile kullanıyorsan, Peperoni gibi biraz fazla yoğun bir deneyim yaşayabilirsin! Peperoni pizzası gibi güçlü bir tada sahip olan bu teknik, yanlış kullanıldığında gereksiz render’lara ve ağır performans sorunlarına yol açabilir. O yüzden iyi optimize edilmiş bir React kodu gibi, malzemeleri dengeli kullanmayı unutma!', 
-            price: 90.0, 
-            rating: 4.7, 
-            reviews: 200 
+        {
+            name: 'Peperoni',
+            description: 'Hala useEffect’i yanlış dependency array ile kullanıyorsan, Peperoni gibi biraz fazla yoğun bir deneyim yaşayabilirsin! Peperoni pizzası gibi güçlü bir tada sahip olan bu teknik, yanlış kullanıldığında gereksiz render’lara ve ağır performans sorunlarına yol açabilir. O yüzden iyi optimize edilmiş bir React kodu gibi, malzemeleri dengeli kullanmayı unutma!',
+            price: 90.0,
+            rating: 4.7,
+            reviews: 200
         },
-        { 
-            name: 'Veggie', 
-            description: 'React’te gereksiz re-render’lar yaparak performansı zorluyorsan, belki biraz hafifletici bir seçenek olan Veggie pizzaya ihtiyacın var! Pure component’ler ve useMemo gibi optimizasyonlarla sayfanı hızlandırabilirsin. Tıpkı sebzelerle hafifletilmiş bu pizza gibi, kodunu da gereksiz yüklerden arındırmalısın.', 
-            price: 80.0, 
-            rating: 4.7, 
-            reviews: 200 
+        {
+            name: 'Veggie',
+            description: 'React’te gereksiz re-render’lar yaparak performansı zorluyorsan, belki biraz hafifletici bir seçenek olan Veggie pizzaya ihtiyacın var! Pure component’ler ve useMemo gibi optimizasyonlarla sayfanı hızlandırabilirsin. Tıpkı sebzelerle hafifletilmiş bu pizza gibi, kodunu da gereksiz yüklerden arındırmalısın.',
+            price: 80.0,
+            rating: 4.7,
+            reviews: 200
         },
-        { 
-            name: 'BBQ', 
-            description: 'Eğer tüm state’leri tek bir yerde yönetmeye çalışıyorsan, Redux kullanmaya başlamak gibidir: Başta karmaşık görünebilir ama alışınca vazgeçemezsin! BBQ pizzası da aynı şekilde yoğun ve bol malzemeli olabilir, ama doğru kullanıldığında harika bir deneyim sunar. State yönetimini iyi organize et, aksi takdirde elinde dağılan bir pizza (ve proje) ile karşılaşabilirsin.', 
-            price: 95.0, 
-            rating: 4.7, 
-            reviews: 200 
+        {
+            name: 'BBQ',
+            description: 'Eğer tüm state’leri tek bir yerde yönetmeye çalışıyorsan, Redux kullanmaya başlamak gibidir: Başta karmaşık görünebilir ama alışınca vazgeçemezsin! BBQ pizzası da aynı şekilde yoğun ve bol malzemeli olabilir, ama doğru kullanıldığında harika bir deneyim sunar. State yönetimini iyi organize et, aksi takdirde elinde dağılan bir pizza (ve proje) ile karşılaşabilirsin.',
+            price: 95.0,
+            rating: 4.7,
+            reviews: 200
         }
     ];
-    
+
 
     const [formData, setFormData] = useState({
         name: '',
@@ -63,7 +66,7 @@ function OrderPage({setOrderDetails}) {
         size: '',
         dough: '',
         note: '',
-        pizzaType:'',
+        pizzaType: '',
     });
     const [isValid, setIsValid] = useState(false);
     const [pizzaCount, setPizzaCount] = useState(1);
@@ -126,8 +129,10 @@ function OrderPage({setOrderDetails}) {
     const handlePizzaCountChange = (description) => {
         if (description === "increment") {
             setPizzaCount(pizzaCount + 1);
+            toast.info("Pizza sayısı artırıldı!", { position: "top-right", autoClose: 2000 });
         } else if (description === "decrement" && pizzaCount > 1) {
             setPizzaCount(pizzaCount - 1);
+            toast.info("Pizza sayısı azaltıldı!", { position: "top-right", autoClose: 2000 });
         }
     };
 
@@ -140,23 +145,11 @@ function OrderPage({setOrderDetails}) {
 
         if (isValid) {
 
-            axios.post('https://reqres.in/api/pizza', {...formData, totalPrice, totalIngredientsPrice})
+            axios.post('https://reqres.in/api/pizza', { ...formData, totalPrice, totalIngredientsPrice })
                 .then((response) => {
                     console.log('Sipariş başarıyla alındı: ', response.data);
                     setOrderDetails(response.data);
                     history.push(`/success`);
-
-
-                    console.log('Sipariş Özeti:', {
-                        id: response.data.id,
-                        Name: response.data.name,
-                        Size: response.data.size,
-                        Dough: response.data.dough,
-                        Ingredients: response.data.ingredients.join(', '),
-                        PizzaCount: response.data.pizzaCount,
-                        TotalPrice: response.data.totalPrice,
-                        Note: formData.note,
-                    });
 
 
                 })
@@ -168,6 +161,7 @@ function OrderPage({setOrderDetails}) {
 
     return (
         <>
+            <ToastContainer />
             <div className='order-general'>
                 <div className="order-section">
                     <div className="order-content">
