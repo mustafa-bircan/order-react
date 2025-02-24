@@ -21,8 +21,8 @@
 
 .succes-content h1 {
   font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 300; 
-    font-size: 86px;
+  font-weight: 300;
+  font-size: 86px;
   color: #FFFFFF;
 }
 
@@ -45,9 +45,9 @@
   margin: 2rem auto;
 }
 
-.general-summary > div:first-child {
+.general-summary>div:first-child {
   font-family: 'Barlow', sans-serif;
-  font-weight: 600; 
+  font-weight: 600;
   font-size: 22px;
 }
 
@@ -62,18 +62,18 @@
 
 .order-brief div {
   font-family: 'Barlow', sans-serif;
-  font-weight: 400; 
-  font-size: 1.2rem; 
+  font-weight: 400;
+  font-size: 1.2rem;
   line-height: 1.6;
-  color: #FFFFFF; 
+  color: #FFFFFF;
 }
 
 
 
 .order-brief strong {
   font-family: 'Barlow', sans-serif;
-  font-weight: 700; 
-  font-size: 1rem; 
+  font-weight: 700;
+  font-size: 1rem;
   color: #FFFFFF;
 }
 
@@ -91,9 +91,9 @@
 
 .total-brief h6 {
   font-family: 'Barlow', sans-serif;
-  font-weight: 600; 
+  font-weight: 600;
   font-size: 1.25rem;
-  color: #FFFFFF; 
+  color: #FFFFFF;
   margin-top: 2rem;
 }
 
@@ -108,13 +108,13 @@
 .summary-total-price span {
   color: #FFFFFF;
   font-size: 1.2rem;
-  font-weight: 500; 
+  font-weight: 500;
   margin-right: 4rem;
   margin-left: 4rem;
 }
 
-.summary-total-price  {
-margin-bottom: 2rem;
+.summary-total-price {
+  margin-bottom: 2rem;
 }
 
 

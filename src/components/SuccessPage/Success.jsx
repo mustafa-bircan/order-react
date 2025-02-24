@@ -4,7 +4,7 @@ import Footer from '../FooterPage/Footer';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 
-function Success({orderDetails}) {
+function Success({ orderDetails }) {
   const history = useHistory();
 
   useEffect(() => {
@@ -14,12 +14,12 @@ function Success({orderDetails}) {
   }, []);
 
   if (!orderDetails) {
-    return null; 
+    return null;
   }
 
 
-console.log(orderDetails);
-const {pizzaType,name,size,dough,ingredients,note,totalPrice,totalIngredientsPrice} = orderDetails;
+  console.log(orderDetails);
+  const { pizzaType, name, size, dough, ingredients, note, totalPrice, totalIngredientsPrice } = orderDetails;
 
   return (
     <>
